@@ -44,6 +44,25 @@ struct SpendingView: View {
                         .padding(.horizontal, 16)
                     }
 
+                    // Total spending summary
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text("Total spending")
+                            .font(.system(size: 13))
+                            .foregroundColor(.secondary)
+                        Text("NOK 6 135")
+                            .font(.system(size: 28, weight: .bold))
+                        HStack(spacing: 4) {
+                            Image(systemName: "arrow.down")
+                                .font(.system(size: 10, weight: .semibold))
+                                .foregroundColor(Color.dnbTeal)
+                            Text("12% less than last month")
+                                .font(.system(size: 12))
+                                .foregroundColor(Color.dnbTeal)
+                        }
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.horizontal, 20)
+
                     // Three overlapping circles chart
                     ThreeCircleChart()
                         .frame(height: 180)
