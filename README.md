@@ -41,8 +41,6 @@ To connect a live AI assistant:
 
 Made by **[Umair](https://www.linkedin.com/in/umairmi/)** as a personal hobby and R&D project to explore how vibe coding can be used to create real-world applications. This app was built entirely using vibe coding — no traditional line-by-line coding. This project has no relation to DNB ASA and was built purely out of curiosity — to explore how quickly a modern banking UI can be prototyped in SwiftUI, and to experiment with adding AI-powered features on top.
 
-Umair is the founder of [Bineric](https://bineric.com), where he builds AI solutions for real businesses.
-
 ---
 
 *Vibe coding credits provided by [Bineric AI](https://bineric.com) — Privacy focused Nordic AI.*
