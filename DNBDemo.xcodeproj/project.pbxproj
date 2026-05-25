@@ -26,6 +26,8 @@
 /* Begin PBXFileReference section */
 		3EF7359C3FE34C61AC1DFF8B /* DNBDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DNBDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1FEF0F76E664B7ABE5B8739 /* DNBDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNBDemoApp.swift; sourceTree = "<group>"; };
+		AA11BB22CC33DD44EE55FF00 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		BB99AA11CC22DD33EE44FF55 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA11BB22CC33DD44EE55FF00 /* Assets.xcassets */; };
 		F22BBC63EE124B628FDD4333 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		226BC03F6C1A434DB3833B30 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		611A82CBD6D8420B9DA0A3C1 /* PaymentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentsView.swift; sourceTree = "<group>"; };
@@ -73,6 +75,7 @@
 			children = (
 				F1FEF0F76E664B7ABE5B8739 /* DNBDemoApp.swift */,
 				F22BBC63EE124B628FDD4333 /* ContentView.swift */,
+				AA11BB22CC33DD44EE55FF00 /* Assets.xcassets */,
 				4E55CD1F4128487FB1C14DC8 /* Views */,
 				3F14753A979443D0B494437B /* Models */,
 				A2B3C4D5E6F7A2B3C4D5E6F7 /* Services */,
@@ -171,6 +174,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB99AA11CC22DD33EE44FF55 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -327,6 +331,7 @@
 				DEVELOPMENT_ASSET_PATHS = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "DNB Clone";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -355,6 +360,7 @@
 				DEVELOPMENT_ASSET_PATHS = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "DNB Clone";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
