@@ -282,16 +282,20 @@ struct QuickActionsRow: View {
     @Binding var showTransfer: Bool
     @Binding var showPay: Bool
     @Binding var showScan: Bool
+    private let haptic = UIImpactFeedbackGenerator(style: .medium)
 
     var body: some View {
         HStack(spacing: 24) {
             QuickActionButton(icon: "arrow.left.arrow.right", label: "Transfer") {
+                haptic.impactOccurred()
                 showTransfer = true
             }
             QuickActionButton(icon: "wallet.bifold", label: "Pay") {
+                haptic.impactOccurred()
                 showPay = true
             }
             QuickActionButton(icon: "qrcode.viewfinder", label: "Scan") {
+                haptic.impactOccurred()
                 showScan = true
             }
             Spacer()
