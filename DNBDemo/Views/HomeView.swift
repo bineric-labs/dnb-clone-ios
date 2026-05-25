@@ -357,9 +357,20 @@ struct AccountsSectionView: View {
                                 .frame(width: 30)
 
                             VStack(alignment: .leading, spacing: 2) {
-                                Text(account.name)
-                                    .font(.system(size: 13))
-                                    .foregroundColor(.primary)
+                                HStack(spacing: 6) {
+                                    Text(account.name)
+                                        .font(.system(size: 13))
+                                        .foregroundColor(.primary)
+                                    if account.type == .savings {
+                                        Text("BSU")
+                                            .font(.system(size: 9, weight: .semibold))
+                                            .foregroundColor(Color.dnbTeal)
+                                            .padding(.horizontal, 5)
+                                            .padding(.vertical, 2)
+                                            .background(Color.dnbLightTeal)
+                                            .cornerRadius(4)
+                                    }
+                                }
                                 Text(account.number)
                                     .font(.system(size: 13))
                                     .foregroundColor(.secondary)
