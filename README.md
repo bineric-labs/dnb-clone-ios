@@ -41,7 +41,11 @@ To connect a live AI assistant:
 
 Made by **Umair** as a personal hobby and R&D project. This project has no relation to DNB ASA and was built purely out of curiosity — to explore how quickly a modern banking UI can be prototyped in SwiftUI, and to experiment with adding AI-powered features on top.
 
-Umair is the founder of [Bineric](https://bineric.no), where he builds AI solutions for real businesses.
+Umair is the founder of [Bineric](https://bineric.com), where he builds AI solutions for real businesses.
+
+---
+
+*Vibe coding credits provided by [Bineric AI](https://bineric.com) — Privacy focused Nordic AI.*
 
 ## License
 
