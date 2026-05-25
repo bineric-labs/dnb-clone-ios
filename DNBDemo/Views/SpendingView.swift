@@ -233,6 +233,20 @@ struct CategoryDetailSheet: View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 0) {
+                    if transactions.isEmpty {
+                        VStack(spacing: 12) {
+                            Image(systemName: "tray")
+                                .font(.system(size: 36))
+                                .foregroundColor(Color(.systemGray3))
+                                .padding(.top, 48)
+                            Text("No transactions")
+                                .font(.system(size: 16, weight: .medium))
+                            Text("Nothing in this category yet.")
+                                .font(.system(size: 13))
+                                .foregroundColor(.secondary)
+                        }
+                        .frame(maxWidth: .infinity)
+                    }
                     ForEach(Array(transactions.enumerated()), id: \.element.id) { index, tx in
                         HStack(spacing: 12) {
                             ZStack {
