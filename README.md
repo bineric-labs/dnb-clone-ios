@@ -39,7 +39,9 @@ To connect a live AI assistant:
 
 ## Built by
 
-Made by **Umair**, founder of [Bineric](https://bineric.no) — AI solutions for real businesses.
+Made by **Umair** as a personal hobby and R&D project. This project has no relation to DNB ASA and was built purely out of curiosity — to explore how quickly a modern banking UI can be prototyped in SwiftUI, and to experiment with adding AI-powered features on top.
+
+Umair is the founder of [Bineric](https://bineric.no), where he builds AI solutions for real businesses.
 
 ## License
 
