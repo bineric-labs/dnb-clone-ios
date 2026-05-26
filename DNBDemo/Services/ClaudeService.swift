@@ -2,41 +2,37 @@ import Foundation
 
 class ClaudeService: ObservableObject {
 
-    // To use the real Claude API, add your Anthropic API key here or in Config.xcconfig:
-    //   ANTHROPIC_API_KEY = sk-ant-...
+    // Add your Bineric API key in Config.xcconfig:
+    //   BINERIC_API_KEY = your-key-here
+    // Get a free key at: https://platform.bineric.com
     private var apiKey: String? {
-        // 1. Check Info.plist (set via xcconfig or build settings)
-        if let key = Bundle.main.object(forInfoDictionaryKey: "ANTHROPIC_API_KEY") as? String,
-           !key.isEmpty, key != "$(ANTHROPIC_API_KEY)" {
+        if let key = Bundle.main.object(forInfoDictionaryKey: "BINERIC_API_KEY") as? String,
+           !key.isEmpty, key != "$(BINERIC_API_KEY)" {
             return key
         }
-        // 2. Fallback: hardcode here for local dev (do NOT commit a real key)
-        // return "sk-ant-..."
         return nil
     }
 
     func ask(question: String, context: String) async throws -> String {
         if let key = apiKey {
-            return try await realClaudeResponse(question: question, context: context, apiKey: key)
+            return try await liveResponse(question: question, context: context, apiKey: key)
         } else {
-            // Fall back to mock responses when no API key is configured
             try await Task.sleep(nanoseconds: 1_200_000_000)
             return Self.mockResponse(for: question.lowercased())
         }
     }
 
-    // MARK: - Real Claude API
+    // MARK: - Bineric API (OpenAI-compatible)
 
-    private func realClaudeResponse(question: String, context: String, apiKey: String) async throws -> String {
-        let url = URL(string: "https://api.anthropic.com/v1/messages")!
+    private func liveResponse(question: String, context: String, apiKey: String) async throws -> String {
+        let url = URL(string: "https://api.bineric.com/api/v1/ai/chat/completions")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue(apiKey, forHTTPHeaderField: "x-api-key")
-        request.setValue("2023-06-01", forHTTPHeaderField: "anthropic-version")
+        request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
 
         let systemPrompt = """
-        You are a friendly, concise personal finance assistant inside the DNB banking app.
+        You are a friendly, concise personal finance assistant inside a banking app.
         You have access to the user's real account balances and recent transactions below.
         Answer in 2-5 sentences max. Use **bold** for key numbers. Use bullet points where helpful.
         Never make up numbers — only use what is in the context provided.
@@ -47,10 +43,10 @@ class ClaudeService: ObservableObject {
         """
 
         let body: [String: Any] = [
-            "model": "claude-opus-4-7",
+            "model": "gpt-4o",
             "max_tokens": 512,
-            "system": systemPrompt,
             "messages": [
+                ["role": "system", "content": systemPrompt],
                 ["role": "user", "content": question]
             ]
         ]
@@ -61,23 +57,26 @@ class ClaudeService: ObservableObject {
 
         guard let http = response as? HTTPURLResponse, http.statusCode == 200 else {
             let errStr = String(data: data, encoding: .utf8) ?? "Unknown error"
-            throw ClaudeError.apiError(errStr)
+            throw AIError.apiError(errStr)
         }
 
-        let decoded = try JSONDecoder().decode(ClaudeResponse.self, from: data)
-        return decoded.content.first?.text ?? "Sorry, I couldn't generate a response."
+        let decoded = try JSONDecoder().decode(OpenAIResponse.self, from: data)
+        return decoded.choices.first?.message.content ?? "Sorry, I couldn't generate a response."
     }
 
-    // MARK: - Response model
+    // MARK: - Response model (OpenAI-compatible format)
 
-    private struct ClaudeResponse: Decodable {
-        let content: [ContentBlock]
-        struct ContentBlock: Decodable {
-            let text: String
+    private struct OpenAIResponse: Decodable {
+        let choices: [Choice]
+        struct Choice: Decodable {
+            let message: Message
+        }
+        struct Message: Decodable {
+            let content: String
         }
     }
 
-    enum ClaudeError: Error, LocalizedError {
+    enum AIError: Error, LocalizedError {
         case apiError(String)
         var errorDescription: String? {
             if case .apiError(let msg) = self { return msg }
@@ -85,7 +84,7 @@ class ClaudeService: ObservableObject {
         }
     }
 
-    // MARK: - Mock responses (used when no API key is set)
+    // MARK: - Mock responses (used when no API key is configured)
 
     private static func mockResponse(for q: String) -> String {
         if q.contains("spend") && (q.contains("month") || q.contains("this")) {

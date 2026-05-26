@@ -1,4 +1,4 @@
-// Add your Anthropic API key here to enable the real AI assistant.
-// Get a key at: https://console.anthropic.com
+// Add your Bineric API key here to enable the live AI assistant.
+// Get a free key at: https://platform.bineric.com
 // Without a key the app uses built-in mock responses — works great for demos.
-ANTHROPIC_API_KEY =
+BINERIC_API_KEY =
